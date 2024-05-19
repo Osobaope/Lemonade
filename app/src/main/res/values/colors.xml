@@ -8,6 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lemonade">#FAFA33</color>
-    <color name="lightAqua">#95D3BC</color>
-    <color name="lightAqua2">#84E1BE</color>
+    <color name="lightAqua">#84E1BE</color>
 </resources>

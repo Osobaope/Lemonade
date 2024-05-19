@@ -106,11 +106,19 @@ fun LemonadeAppContent(modifier: Modifier = Modifier) {
     }
 
     var processImage by remember {
-        mutableIntStateOf(R.drawable.lemon_drink)
+        mutableIntStateOf(R.drawable.lemon_tree)
     }
 
     var processText by remember {
         mutableIntStateOf(R.string.lemonStepOneText)
+    }
+
+    var stepTwoRandomNumber by remember {
+        mutableIntStateOf((2..4).random())
+    }
+
+    var stepTwoTapCounter by remember {
+        mutableIntStateOf(0)
     }
     Column (
         modifier = modifier
@@ -125,26 +133,33 @@ fun LemonadeAppContent(modifier: Modifier = Modifier) {
                 when(processStep) {
                     1 -> {
                         processStep = 2
-                        processImage = R.drawable.lemon_tree
-                        processText = R.string.lemonStepOneText
-                         }
-                    2 -> {
-                        processStep = 3
                         processImage = R.drawable.lemon_squeeze
-                        processText = R.string.lemonStepTwoText}
+                        processText = R.string.lemonStepTwoText
+                    }
+                    2 -> {
+                        stepTwoTapCounter++
+                        if (stepTwoTapCounter == stepTwoRandomNumber) {
+                            processStep = 3
+                            processImage = R.drawable.lemon_drink
+                            processText = R.string.lemonStepThreeText
+                            stepTwoTapCounter = 0
+                            stepTwoRandomNumber = (2..4).random()
+                        }
+                        }
                     3 -> {
                         processStep = 4
-                        processImage = R.drawable.lemon_drink
-                        processText = R.string.lemonStepThreeText}
+                        processImage = R.drawable.lemon_restart
+                        processText = R.string.lemonStepFourText
+                    }
                     4 -> {
                         processStep = 1
-                        processImage = R.drawable.lemon_restart
-                        processText = R.string.lemonStepTwoText}
+                        processImage = R.drawable.lemon_tree
+                        processText = R.string.lemonStepOneText}
                 }
             },
             modifier = modifier,
             colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R
-                .color.lightAqua2)),
+                .color.lightAqua)),
             shape = RoundedCornerShape(20)
 
 
